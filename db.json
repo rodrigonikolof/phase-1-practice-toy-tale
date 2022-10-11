@@ -47,6 +47,12 @@
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": 1
+    },
+    {
+      "name": "Lego Man",
+      "image": "https://p.turbosquid.com/ts-thumb/xb/QuiP2G/vURW69Tt/lego_man_360/jpg/1455518968/600x600/turn_fit_q87/bc9d485ef1d30d28c11da69caa26bae3853b645f/lego_man_360-1.jpg",
+      "likes": 2,
+      "id": 9
     }
   ]
 }

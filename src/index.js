@@ -33,20 +33,49 @@ function displayCurrentToys(toy){
     <h2>${toy.name}</h2>
     <img src='${toy.image}' class='toy-avatar'/img>   
     <p>${toy.likes} Likes</p>
-    <button class ='like-btn' id='${toy.name}'> Like </button>`
+    <button class ='like-btn' id='${toy.id}'> Like </button>`
     document.querySelector('#toy-collection').appendChild(toyDiv);
-    
+    toyDiv.querySelector('.like-btn').addEventListener('click', ()=>{
+      toy.likes += 1;
+      toyDiv.querySelector('p').textContent = `${toy.likes} likes`;
+      updateLikes(toy)
+    } )
+  }
+
+  function updateLikes(toy){
+    fetch(`http://localhost:3000/toys/${toy.id}`,{
+      method: 'PATCH',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify(toy)
+    })
+    .then(res => res.json())
+    // .then(toys => console.log(toys))
   }
 
 
+const submitBtn = document.querySelector('.container');
+submitBtn.addEventListener('submit', e => handleFormData(e));
 
-const submitBtn = document.querySelector('.submit');
-submitBtn.addEventListener('click', (e)=> addNewToy(e));
-
-function addNewToy(e){
+function handleFormData(e){
     e.preventDefault();
-    console.log(formData)
+    
+    let formToy = {
+      name: e.target.name.value,
+      image: e.target.image.value,
+      likes : 0,
+    }
+    displayCurrentToys(formToy);
+    submitToy(formToy);
 }
 
-let formData = document.querySelectorAll('.input-text').value
-
+function submitToy(toy){
+  fetch('http://localhost:3000/toys',{
+    method: 'POST',
+    headers: {
+                'Content-Type': 'application/json'
+    },
+    body:JSON.stringify(toy)
+  })
+  }
